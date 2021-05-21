@@ -20,7 +20,7 @@ auto GCD(auto a, auto b) {
 }
 
 ///
-/// \brief LCM: the least common multipiler of two numbers
+/// \brief LCM: the least common multiple of two numbers
 /// \param a number one
 /// \param b number two
 /// \caption a*b/GCD9(a, b)
