@@ -7,23 +7,40 @@
 /// \brief GCD: the greatest common divisor of two numbers
 /// \param a number one
 /// \param b number two
-/// \caption GCD(a, b) = GCD(b, a mod b)
+/// \caption GCD(a, b) = GCD(b, a mod b) --> original method
+///          GCD(a,b)=2*GCD(a/2,b/2), as if a and b are even
+///          GCD(a,b)=GCD(a,b/2), as if a is odd and b is even
+///          GCD(a,b)=GCD((a-b)/2,b), as if a and b are odd
 ///
 auto GCD(auto a, auto b) {
-  if (a < b)
-    swap(a, b);
-  while (b) {
-    swap(a, b);
-    b %= a;
+  auto m = 0, n = 0;
+  while (!(a & 1 && b & 1)) {
+    if (!(a & 1)) {
+      a >>= 1;
+      ++m;
+    }
+    if (!(b & 1)) {
+      b >>= 1;
+      ++n;
+    }
   }
-  return a;
+  auto k = std::min(m, n);
+  if (a < b)
+    std::swap(a, b);
+  while (a - b > 0) {
+    a -= b;
+    while (!(a & 1))
+      a >>= 1;
+    if (a < b)
+      std::swap(a, b);
+  }
+  return b << k;
 }
-
 ///
 /// \brief LCM: the least common multiple of two numbers
 /// \param a number one
 /// \param b number two
-/// \caption a*b/GCD9(a, b)
+/// \caption a*b/GCD(a, b)
 ///
 inline auto LCM(auto a, auto b) { return a * b / GCD(a, b); };
 
