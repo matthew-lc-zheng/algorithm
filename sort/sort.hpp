@@ -20,7 +20,7 @@ void merge_sort(std::vector<int>::iterator l, std::vector<int>::iterator r) {
     std::merge(v1.begin(), v1.end(), v2.begin(), v2.end(), l);
   }
 }
-
+//------------------------------------------------------------------------------------------------------------------------------
 ///
 /// \brief quick_sort
 /// \param l
@@ -36,5 +36,46 @@ void quick_sort(std::vector<int>::iterator l, std::vector<int>::iterator r) {
     quick_sort(p, r);
   }
 }
+//------------------------------------------------------------------------------------------------------------------------------
+///
+/// \brief heapfy
+/// \param v
+/// \param i
+/// \param heap_size
+/// \caption
+///
+void heapfy(std::vector<int>::iterator v, std::vector<int>::iterator i,
+            auto heap_size) {
+  auto l = v + (i - v + 1 << 1) - 1;
+  auto r = l + 1;
+  while (l - v < heap_size && r - v < heap_size &&
+         *i != std::max({*i, *l, *r})) {
+    if (*l > *r) {
+      std::swap(*i, *l);
+      i = l;
+    } else {
+      std::swap(*i, *r);
+      i = r;
+    }
+    l = v + (i - v + 1 << 1) - 1;
+    r = l + 1;
+  }
+}
+///
+/// \brief heap_sort
+/// \param l
+/// \param r
+/// \caption
+///
+void heap_sort(std::vector<int>::iterator l, std::vector<int>::iterator r) {
+  auto heap_size = r - l;
+  for (auto i = heap_size - 1 >> 1; i >= 0; --i)
+    heapfy(l, l + i, heap_size);
+  while (heap_size > 1) {
+    std::swap(*l, *(l + heap_size - 1));
+    heapfy(l, l, --heap_size);
+  }
+}
+//------------------------------------------------------------------------------------------------------------------------------
 
 #endif
