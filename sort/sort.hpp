@@ -1,3 +1,5 @@
+#ifndef SORT_HPP
+#define SORT_HPP
 #include <bits/stdc++.h>
 
 ///
@@ -34,3 +36,5 @@ void quick_sort(std::vector<int>::iterator l, std::vector<int>::iterator r) {
     quick_sort(p, r);
   }
 }
+
+#endif
