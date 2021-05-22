@@ -44,7 +44,7 @@ void quick_sort(std::vector<int>::iterator l, std::vector<int>::iterator r) {
 /// \param heap_size
 /// \caption
 ///
-void heapfy(std::vector<int>::iterator v, std::vector<int>::iterator i,
+void _heapfy(std::vector<int>::iterator v, std::vector<int>::iterator i,
             auto heap_size) {
   auto l = v + (i - v + 1 << 1) - 1;
   auto r = l + 1;
@@ -70,10 +70,10 @@ void heapfy(std::vector<int>::iterator v, std::vector<int>::iterator i,
 void heap_sort(std::vector<int>::iterator l, std::vector<int>::iterator r) {
   auto heap_size = r - l;
   for (auto i = heap_size - 1 >> 1; i >= 0; --i)
-    heapfy(l, l + i, heap_size);
+    _heapfy(l, l + i, heap_size);
   while (heap_size > 1) {
     std::swap(*l, *(l + heap_size - 1));
-    heapfy(l, l, --heap_size);
+    _heapfy(l, l, --heap_size);
   }
 }
 //------------------------------------------------------------------------------------------------------------------------------
